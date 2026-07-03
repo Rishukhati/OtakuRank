@@ -1,30 +1,21 @@
 import AnimeCard from "./components/AnimeCard"
-import { useState, useEffect } from "react"
-
+import { Routes, Route } from "react-router-dom"
+import Home from "./pages/Home"
+import AnimeDetail from "./pages/AnimeDetail"
+import Favourites from "./pages/Favourites"
+import Navbar from "./components/Navbar"
 
 function App() {
-  const [list, setList] = useState([]);
-
-  useEffect(() => {
-    fetch(`https://api.jikan.moe/v4/top/anime?limit=12`)
-      .then(response => response.json())
-      .then(json => {
-        if (json.data) {
-          setList(json.data)
-        }
-      })
-  }, [])
-
   return (
     <>
-      <ul>
-        {list.map((anime, index) => (
-          <AnimeCard key={anime.mal_id} card={anime} />
-        ))}
-      </ul>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/anime/:id" element={<AnimeDetail />} />
+        <Route path="/favourites" element={<Favourites />} />
+      </Routes>
     </>
-  );
-
+  )
 }
 
 
