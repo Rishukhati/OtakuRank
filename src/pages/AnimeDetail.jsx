@@ -14,8 +14,11 @@ function AnimeDetail() {
     return (
         <>
             <h1>  {detail?.title} </h1>
-            <img src="detail?.images.jpg.large_image_url" alt="" />
-
+            <p> {detail?.score} </p>
+            <p> {detail?.episodes} </p>
+            <p> {detail?.status} </p>
+            <p> {detail?.synopsis} </p>
+            <img src={detail?.images.jpg.large_image_url} alt="" />
         </>
     )
 }
