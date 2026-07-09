@@ -4,6 +4,7 @@ import AnimeCard from "../components/AnimeCard";
 
 function Home() {
     const [list, setList] = useState([]);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         fetch(`https://api.jikan.moe/v4/top/anime?limit=12`)
@@ -22,6 +23,7 @@ function Home() {
                     <AnimeCard key={anime.mal_id} card={anime} />
                 ))}
             </ul>
+            <input type="search u fav " />
         </>
     );
 
