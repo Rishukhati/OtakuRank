@@ -7,14 +7,24 @@ function Home() {
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        fetch(`https://api.jikan.moe/v4/top/anime?limit=12`)
-            .then(response => response.json())
-            .then(json => {
-                if (json.data) {
-                    setList(json.data)
-                }
-            })
-    }, [])
+        if (search) {
+            fetch(`https://api.jikan.moe/v4/anime?q=${search}`)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.data) {
+                        setList(json.data)
+                    }
+                })
+        } else {
+            fetch(`https://api.jikan.moe/v4/top/anime?limit=12`)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.data) {
+                        setList(json.data)
+                    }
+                })
+        }
+    }, [search])
 
     return (
         <>
@@ -23,7 +33,11 @@ function Home() {
                     <AnimeCard key={anime.mal_id} card={anime} />
                 ))}
             </ul>
-            <input type="search u fav " />
+            <input type=" text "
+                placeholder=" search ur fav "
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
         </>
     );
 
